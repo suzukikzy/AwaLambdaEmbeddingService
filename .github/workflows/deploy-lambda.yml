@@ -1,0 +1,29 @@
+name: Deploy to AWS Lambda AwaLambdaEmbeddingService
+
+on:
+  push:
+    branches:
+      - main  # mainブランチにpushされたら実行
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest  # 実行環境
+    steps:
+      - name: リポジトリをチェックアウト
+        uses: actions/checkout@v4
+
+      - name: AWS CLIをセットアップ
+        uses: aws-actions/configure-aws-credentials@v2
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ap-northeast-1  # 東京リージョン（適宜変更）
+
+      - name: Lambda関数をZIP化
+        run: zip -r function.zip . -x '*.git*'  # .gitフォルダを除外
+
+      - name: Lambdaにデプロイ
+        run: |
+          aws lambda update-function-code \
+            --function-name my-lambda-function \
+            --zip-file fileb://function.zip
