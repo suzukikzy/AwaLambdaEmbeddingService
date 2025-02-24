@@ -1,0 +1,20 @@
+{
+  "records": [
+    {
+      "messageId": "fce61db9-1e88-4f95-bdfe-828f6d2d2b63",
+      "receiptHandle": "AQEBwJnqGfcnV2Kx4UlZYZaDrc1M4GmCJfF8VG02sD8U3fQU4bGf5+hImJ5GpVfm9WUE2Qx8hhz5fBCFAg6Xds2U3C1BGEyd",
+      "body": "{\"targetString\":\"こんにちは\"}",
+      "attributes": {
+        "ApproximateReceiveCount": "1",
+        "SentTimestamp": "1625778314000",
+        "SenderId": "AIDAEXAMPLE",
+        "ApproximateFirstReceiveTimestamp": "1625778314000"
+      },
+      "messageAttributes": {},
+      "md5OfBody": "8f05db30172c3b398f34cfec97ec2c44",
+      "eventSource": "aws:sqs",
+      "eventSourceArn": "arn:aws:sqs:us-west-2:123456789012:MyQueue",
+      "awsRegion": "us-west-2"
+    }
+  ]
+}
