@@ -22,7 +22,9 @@ jobs:
 
       - name: JARファイルを作成
         run: |
-          cd C:/Development/01_SES/AwaLambdaEmbeddingService
+          # リポジトリのルートに移動
+          cd $GITHUB_WORKSPACE
+          # binフォルダ内のクラスファイルをJARにまとめる
           jar -cvf AwaLambdaEmbeddingService.jar -C bin .
 
       - name: Lambda関数をZIP化
