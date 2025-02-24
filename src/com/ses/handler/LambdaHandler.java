@@ -1,4 +1,4 @@
-package main.java.com.ses.handler;
+package com.ses.handler;
 
 import java.io.IOException;
 import java.util.ArrayList;

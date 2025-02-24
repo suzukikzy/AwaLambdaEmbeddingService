@@ -1,4 +1,4 @@
-package test.java.com.ses.handler;
+package test.com.ses.handler;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -8,8 +8,8 @@ import org.junit.jupiter.api.Test;
 
 import com.amazonaws.services.lambda.runtime.events.SQSEvent;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.ses.handler.LambdaHandler;
 
-import main.java.com.ses.handler.LambdaHandler;
 
 public class IT1Test {
     /**

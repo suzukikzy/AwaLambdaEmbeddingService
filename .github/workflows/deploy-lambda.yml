@@ -42,5 +42,5 @@ jobs:
         run: |
           aws lambda update-function-configuration \
             --function-name AwaLambdaEmbeddingService \
-            --handler main.java.com.ses.handler.LambdaHandler::handleRequest \
+            --handler com.ses.handler.LambdaHandler::handleRequest \
             --region ap-northeast-1
