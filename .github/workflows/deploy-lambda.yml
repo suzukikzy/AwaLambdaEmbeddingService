@@ -24,12 +24,16 @@ jobs:
         run: |
           # リポジトリのルートに移動
           cd $GITHUB_WORKSPACE
-          # binフォルダ内のクラスファイルをJARにまとめる
-          jar -cvf AwaLambdaEmbeddingService.jar -C bin .
+          # JAR作成
+          jar -cvf AwaLambdaEmbeddingService.jar .
 
       - name: Lambda関数をZIP化
         run: |
-          zip -r function.zip AwaLambdaEmbeddingService.jar
+          # リポジトリのルートに移動
+          cd $GITHUB_WORKSPACE
+          # JARをZIPにリネーム
+          mv AwaLambdaEmbeddingService.jar function.zip
+          # zip -r function.zip AwaLambdaEmbeddingService.jar
 
       - name: Lambdaにデプロイ
         run: |
