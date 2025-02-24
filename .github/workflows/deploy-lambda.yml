@@ -25,5 +25,5 @@ jobs:
       - name: Lambdaにデプロイ
         run: |
           aws lambda update-function-code \
-            --function-name my-lambda-function \
+            --function-name AwaLambdaEmbeddingService \
             --zip-file fileb://function.zip
