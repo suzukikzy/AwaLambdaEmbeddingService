@@ -8,6 +8,7 @@ on:
 jobs:
   deploy:
     runs-on: ubuntu-latest  # 実行環境
+    
     steps:
       - name: リポジトリをチェックアウト
         uses: actions/checkout@v4
@@ -19,11 +20,35 @@ jobs:
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: ap-northeast-1  # 東京リージョン（適宜変更）
 
+      - name: Javaをインストール
+        uses: actions/setup-java@v3
+        with:
+          distribution: 'temurin'  # Amazon Corretto も使用可能
+          java-version: '17'  # 使用するJavaのバージョン
+
+      - name: Javaソースコードをコンパイル
+        run: |
+          mkdir -p out
+          javac -d out $(find src/main/java -name "*.java")
+
+      - name: JARファイルを作成
+        run: |
+          jar cvf function.jar -C out .
+
       - name: Lambda関数をZIP化
-        run: zip -r function.zip . -x '*.git*'  # .gitフォルダを除外
+        run: |
+          zip -r function.zip function.jar
 
       - name: Lambdaにデプロイ
         run: |
           aws lambda update-function-code \
             --function-name AwaLambdaEmbeddingService \
-            --zip-file fileb://function.zip
+            --zip-file fileb://function.zip \
+            --region ap-northeast-1
+
+      - name: Lambdaのハンドラを設定
+        run: |
+          aws lambda update-function-configuration \
+            --function-name AwaLambdaEmbeddingService \
+            --handler main.java.com.ses.handler.LambdaHandler::handleRequest \
+            --region ap-northeast-1
